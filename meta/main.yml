@@ -1,0 +1,16 @@
+dependencies:
+  - {
+      role: kubernetes_node,
+      kube_kubelet_args: "{{ kube_master_kubelet_args }}"
+    }
+
+galaxy_info:
+  role_name: kubernetes_master
+  author: jumperfly
+  description: ansible-role-kubernetes-master
+  license: Apache
+  min_ansible_version: "2.0"
+  platforms:
+    - name: EL
+      versions:
+        - "7"
