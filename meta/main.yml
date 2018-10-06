@@ -1,6 +1,6 @@
 dependencies:
   - {
-      role: kubernetes_node,
+      role: jumperfly.kubernetes_node,
       kube_kubelet_args: "{{ kube_master_kubelet_args }}"
     }
 
