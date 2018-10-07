@@ -1,7 +1,7 @@
 # Some vars referenced in this role are inherited from kubernetes_node, eg. kube_version
 
 # Kubernetes master kubelet overrides
-kube_master_kubelet_args: --kubeconfig=/var/lib/kubelet/kubeconfig --pod-manifest-path=/etc/kubernetes/manifests --cluster-dns={{ kube_cluster_dns }} --node-labels kubernetes.io/role=master --register-with-taints dedicated=master:NoSchedule
+kube_master_kubelet_args: --kubeconfig=/var/lib/kubelet/kubeconfig --pod-manifest-path=/etc/kubernetes/manifests --cluster-dns={{ kube_cluster_dns }} --cluster-domain={{ kube_cluster_domain }} --node-labels kubernetes.io/role=master --register-with-taints dedicated=master:NoSchedule
 
 # Kubernetes apiserver configuration
 kube_apiserver_listen_ip: "{{ ip }}"
