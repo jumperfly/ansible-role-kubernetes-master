@@ -1,7 +1,12 @@
 dependencies:
   - {
       role: jumperfly.kubernetes_node,
-      kube_kubelet_args: "{{ kube_master_kubelet_args }}"
+      kube_node_kubelet_args: "{{ kube_master_kubelet_args }}"
+    }
+  - {
+      role: jumperfly.etcd_node,
+      kubelet_args: "{{ kube_master_kubelet_args }}",
+      etcd_pod_install: yes
     }
 
 galaxy_info:
