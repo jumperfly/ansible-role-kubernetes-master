@@ -4,6 +4,7 @@
     - apiserver
     - scheduler
     - controller-manager
+  register: master_pods_result
 
 - include: configure-services.yml
   tags:

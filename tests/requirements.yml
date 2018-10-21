@@ -1,0 +1,5 @@
+- src: jumperfly.ca
+- src: jumperfly.etcd_node
+- src: jumperfly.kubernetes_node
+- src: jumperfly.flannel
+- src: jumperfly.coredns
