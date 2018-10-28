@@ -11,6 +11,26 @@ kube_apiserver_listen_ip: "{{ ip }}"
 kube_apiserver_etcd_group: etcd_nodes
 kube_apiserver_admission_plugins: NamespaceLifecycle,LimitRanger,ServiceAccount,DefaultStorageClass,DefaultTolerationSeconds,MutatingAdmissionWebhook,ValidatingAdmissionWebhook,ResourceQuota
 
+# Kubernetes apiserver certificate configuration
+kube_apiserver_cert_etcd_ca_delegate_name: etcd-ca
+kube_apiserver_cert_kube_ca_delegate_name: kubernetes-ca
+kube_apiserver_cert_base_dir: /srv/kubernetes
+kube_apiserver_cert_name: "apiserver-{{ ansible_hostname }}"
+kube_apiserver_cert_common_name: kubernetes
+kube_apiserver_cert_hosts:
+  - kubernetes
+  - kubernetes.default
+  - kubernetes.default.svc
+  - kubernetes.default.svc.cluster
+  - kubernetes.default.svc.cluster.local
+  - 10.0.0.1
+  - "{{ kube_apiserver_listen_ip }}"
+kube_apiserver_cert_country: GB
+kube_apiserver_cert_city: London
+kube_apiserver_cert_state: Greater London
+kube_apiserver_cert_organization_name: Ansible Certificate
+kube_apiserver_cert_organizational_unit_name: Kubernetes
+
 # Kubernetes controller-manager configuration
 kube_controller_manager_listen_ip: "{{ ip }}"
 kube_pod_cidr_range: "10.201.0.0/16"

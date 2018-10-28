@@ -23,13 +23,13 @@
               {%- if not loop.last %},{% endif %}
             {%- endfor -%}
           ",
-          "--etcd-cafile={{ kube_ca_cert }}",
-          "--etcd-certfile={{ kube_cert }}",
-          "--etcd-keyfile={{ kube_key }}",
+          "--etcd-cafile={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_etcd_ca_delegate_name }}-chain.pem",
+          "--etcd-certfile={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-etcd.pem",
+          "--etcd-keyfile={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-etcd-key.pem",
           "--enable-admission-plugins={{ kube_apiserver_admission_plugins }}",
-          "--tls-cert-file={{ kube_cert }}",
-          "--tls-private-key-file={{ kube_key }}",
-          "--client-ca-file={{ kube_ca_cert }}"
+          "--tls-cert-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube.pem",
+          "--tls-private-key-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube-key.pem",
+          "--client-ca-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_kube_ca_delegate_name }}-chain.pem"
         ],
         "ports": [
           {
@@ -45,8 +45,8 @@
         ],
         "volumeMounts": [
           {
-            "name": "srvkube",
-            "mountPath": "/srv/kubernetes",
+            "name": "certdir",
+            "mountPath": "{{ kube_apiserver_cert_base_dir }}",
             "readOnly": true
           },
           {
@@ -68,9 +68,9 @@
     ],
     "volumes": [
       {
-        "name": "srvkube",
+        "name": "certdir",
         "hostPath": {
-          "path": "/srv/kubernetes"
+          "path": "{{ kube_apiserver_cert_base_dir }}"
         }
       },
       {

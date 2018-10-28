@@ -1,13 +1,32 @@
 dependencies:
-  - {
-      role: jumperfly.kubernetes_node,
-      kube_node_kubelet_args: "{{ kube_master_kubelet_args }}"
-    }
-  - {
-      role: jumperfly.etcd_node,
-      kubelet_args: "{{ kube_master_kubelet_args }}",
-      etcd_pod_install: yes
-    }
+  - role: jumperfly.kubernetes_node
+    kube_node_kubelet_args: "{{ kube_master_kubelet_args }}"
+  - role: jumperfly.etcd_node
+    kubelet_args: "{{ kube_master_kubelet_args }}"
+    etcd_pod_install: yes
+  - role: jumperfly.ssl_cert
+    ssl_cert_ca_delegate_name: "{{ kube_apiserver_cert_etcd_ca_delegate_name }}"
+    ssl_cert_type: client
+    ssl_cert_base_dir: "{{ kube_apiserver_cert_base_dir }}"
+    ssl_cert_name: "{{ kube_apiserver_cert_name }}-etcd"
+    ssl_cert_common_name: "{{ kube_apiserver_cert_common_name }}"
+    ssl_cert_country: "{{ kube_apiserver_cert_country }}"
+    ssl_cert_city: "{{ kube_apiserver_cert_city }}"
+    ssl_cert_state: "{{ kube_apiserver_cert_state }}"
+    ssl_cert_organization_name: "{{ kube_apiserver_cert_organization_name }}"
+    ssl_cert_organizational_unit_name: "{{ kube_apiserver_cert_organizational_unit_name }}"
+  - role: jumperfly.ssl_cert
+    ssl_cert_ca_delegate_name: "{{ kube_apiserver_cert_kube_ca_delegate_name }}"
+    ssl_cert_type: server
+    ssl_cert_base_dir: "{{ kube_apiserver_cert_base_dir }}"
+    ssl_cert_name: "{{ kube_apiserver_cert_name }}-kube"
+    ssl_cert_common_name: "{{ kube_apiserver_cert_common_name }}"
+    ssl_cert_hosts: "{{ kube_apiserver_cert_hosts }}"
+    ssl_cert_country: "{{ kube_apiserver_cert_country }}"
+    ssl_cert_city: "{{ kube_apiserver_cert_city }}"
+    ssl_cert_state: "{{ kube_apiserver_cert_state }}"
+    ssl_cert_organization_name: "{{ kube_apiserver_cert_organization_name }}"
+    ssl_cert_organizational_unit_name: "{{ kube_apiserver_cert_organizational_unit_name }}"
 
 galaxy_info:
   role_name: kubernetes_master
