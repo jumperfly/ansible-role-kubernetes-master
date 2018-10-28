@@ -7,7 +7,7 @@ end
 
 $node_count = 1
 $default_memory = 384
-$master_memory = 1280
+$master_memory = 1536
 $ip_prefix = "192.168.99"
 
 node_memory = $default_memory
