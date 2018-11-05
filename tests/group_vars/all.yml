@@ -1,7 +1,0 @@
-docker_yum_repo_url: http://192.168.99.1:8080/linux/centos/7/x86_64/stable
-docker_yum_repo_gpg: http://192.168.99.1:8080/linux/centos/gpg
-kube_yum_repo_url: http://192.168.99.1:8081/yum/repos/kubernetes-el7-x86_64
-kube_yum_repo_gpg: http://192.168.99.1:8081/yum/doc/rpm-package-key.gpg
-kube_yum_repo_repo_gpgcheck: no
-#kube_docker_registry: 192.168.99.1:5000
-kube_master_taint_node: no
