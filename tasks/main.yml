@@ -6,6 +6,11 @@
     - controller-manager
   register: master_pods_result
 
+- name: Copy local kubeconfig
+  copy:
+    src: kubeconfig-local
+    dest: /etc/kubernetes/kubeconfig-local
+
 - include: configure-services.yml
   tags:
   - configure-services
