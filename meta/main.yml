@@ -1,6 +1,6 @@
 dependencies:
   - src: jumperfly.kubernetes_node
-    version: v0.1.1
+    version: v0.1.2
     kube_node_kubelet_args: "{{ kube_master_kubelet_args }}"
   - src: jumperfly.etcd_node
     version: v0.1.2
