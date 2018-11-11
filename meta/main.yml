@@ -7,14 +7,14 @@ dependencies:
     kubelet_args: "{{ kube_master_kubelet_args }}"
     etcd_pod_install: yes
   - src: jumperfly.ssl_cert
-    version: v0.2.0
+    version: v0.2.1
     ssl_cert_ca_delegate_name: "{{ kube_apiserver_cert_etcd_ca_delegate_name }}"
     ssl_cert_type: client
     ssl_cert_file_base_dir: "{{ kube_apiserver_cert_base_dir }}"
     ssl_cert_name: "{{ kube_apiserver_cert_name }}-etcd"
     ssl_cert_subject: "{{ kube_apiserver_cert_subject }}"
   - src: jumperfly.ssl_cert
-    version: v0.2.0
+    version: v0.2.1
     ssl_cert_ca_delegate_name: "{{ kube_apiserver_cert_kube_ca_delegate_name }}"
     ssl_cert_type: server
     ssl_cert_file_base_dir: "{{ kube_apiserver_cert_base_dir }}"
