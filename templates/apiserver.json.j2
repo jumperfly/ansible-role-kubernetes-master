@@ -23,13 +23,13 @@
               {%- if not loop.last %},{% endif %}
             {%- endfor -%}
           ",
-          "--etcd-cafile={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_etcd_ca_delegate_name }}-chain.pem",
+          "--etcd-cafile={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-etcd-chain.pem",
           "--etcd-certfile={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-etcd.pem",
           "--etcd-keyfile={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-etcd-key.pem",
           "--enable-admission-plugins={{ kube_apiserver_admission_plugins }}",
           "--tls-cert-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube.pem",
           "--tls-private-key-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube-key.pem",
-          "--client-ca-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_kube_ca_delegate_name }}-chain.pem"
+          "--client-ca-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube-chain.pem"
         ],
         "ports": [
           {

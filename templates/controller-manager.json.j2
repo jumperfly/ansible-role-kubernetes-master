@@ -19,7 +19,7 @@
           "--cluster-cidr={{ kube_pod_cidr_range }}",
           "--service-account-private-key-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube-key.pem",
           "--master=127.0.0.1:8080",
-          "--root-ca-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_kube_ca_delegate_name }}-chain.pem"
+          "--root-ca-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube-chain.pem"
         ],
         "volumeMounts": [
           {
