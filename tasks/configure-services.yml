@@ -1,6 +1,0 @@
-- name: Wait for apiserver to start - 30 seconds
-  wait_for: port=8080 timeout=30
-  register: wait_for_apiserver_result
-- name: Pause for apiserver to start fully - 30 seconds
-  pause: seconds=30
-  when: wait_for_apiserver_result.elapsed|default(0) > 0 or master_pods_result.changed
