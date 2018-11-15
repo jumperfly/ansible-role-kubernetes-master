@@ -24,13 +24,7 @@ kube_apiserver_cert_hosts:
   - kubernetes.default.svc.cluster.local
   - 10.0.0.1
   - "{{ kube_apiserver_listen_ip }}"
-kube_apiserver_cert_subject:
-  common_name: kubernetes
-  country: GB
-  city: London
-  state: Greater London
-  organization_name: Ansible Certificate
-  organizational_unit_name: Kubernetes
+kube_apiserver_cert_subject_common_name: kubernetes
 
 # Kubernetes controller-manager configuration
 kube_controller_manager_listen_ip: "{{ ip }}"
