@@ -46,7 +46,7 @@
         "volumeMounts": [
           {
             "name": "certdir",
-            "mountPath": "{{ kube_apiserver_cert_base_dir }}",
+            "mountPath": "{{ kube_apiserver_cert_dir }}",
             "readOnly": true
           },
           {
@@ -70,7 +70,7 @@
       {
         "name": "certdir",
         "hostPath": {
-          "path": "{{ kube_apiserver_cert_base_dir }}"
+          "path": "{{ kube_apiserver_cert_dir }}"
         }
       },
       {
