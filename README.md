@@ -16,7 +16,8 @@ See the [SSL Configuration](#ssl-configuration) section for more information.
 
 
 ## Configuration (dependencies)
-Some of the relevant configuration from dependencies is shown below.
+Some of the relevant configiuration from dependencies is shown below.
+
 | Key | Dependency |
 |-----|------------|
 | ``kube_version``        | jumperfly.kubelet |
