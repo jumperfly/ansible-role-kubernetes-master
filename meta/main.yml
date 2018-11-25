@@ -1,26 +1,10 @@
 dependencies:
   - src: jumperfly.kubernetes_node
-    version: v0.2.0
+    version: master
     kube_node_kubelet_args: "{{ kube_master_kubelet_args }}"
   - src: jumperfly.etcd_node
-    version: v0.2.0
-    kubelet_args: "{{ kube_master_kubelet_args }}"
+    version: master
     etcd_pod_install: yes
-  - src: jumperfly.ssl_cert
-    version: v0.3.0
-    ssl_cert_ca_delegate_name: "{{ kube_apiserver_cert_etcd_ca_delegate_name }}"
-    ssl_cert_type: client
-    ssl_cert_file_base_dir: "{{ kube_apiserver_cert_base_dir }}"
-    ssl_cert_name: "{{ kube_apiserver_cert_name }}-etcd"
-    ssl_cert_subject_common_name: "{{ kube_apiserver_cert_subject_common_name }}"
-  - src: jumperfly.ssl_cert
-    version: v0.3.0
-    ssl_cert_ca_delegate_name: "{{ kube_apiserver_cert_kube_ca_delegate_name }}"
-    ssl_cert_type: server
-    ssl_cert_file_base_dir: "{{ kube_apiserver_cert_base_dir }}"
-    ssl_cert_name: "{{ kube_apiserver_cert_name }}-kube"
-    ssl_cert_hosts: "{{ kube_apiserver_cert_hosts }}"
-    ssl_cert_subject_common_name: "{{ kube_apiserver_cert_subject_common_name }}"
 
 galaxy_info:
   role_name: kubernetes_master

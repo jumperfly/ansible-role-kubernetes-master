@@ -17,14 +17,14 @@
           "--allocate-node-cidrs",
           "--bind-address={{ kube_controller_manager_listen_ip }}",
           "--cluster-cidr={{ kube_pod_cidr_range }}",
-          "--service-account-private-key-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube-key.pem",
+          "--service-account-private-key-file={{ kube_apiserver_key }}",
           "--master=127.0.0.1:8080",
-          "--root-ca-file={{ kube_apiserver_cert_base_dir }}/{{ kube_apiserver_cert_name }}-kube-chain.pem"
+          "--root-ca-file={{ kube_apiserver_ca_cert }}"
         ],
         "volumeMounts": [
           {
             "name": "certdir",
-            "mountPath": "{{ kube_apiserver_cert_base_dir }}",
+            "mountPath": "{{ kube_apiserver_cert_dir }}",
             "readOnly": true
           },
           {
@@ -48,7 +48,7 @@
       {
         "name": "certdir",
         "hostPath": {
-          "path": "{{ kube_apiserver_cert_base_dir }}"
+          "path": "{{ kube_apiserver_cert_dir }}"
         }
       },
       {
