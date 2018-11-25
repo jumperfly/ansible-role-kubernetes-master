@@ -14,9 +14,9 @@ kube_controller_manager_iface: "{{ kube_apiserver_iface }}"
 
 # SSL configuration
 kube_apiserver_cert_dir: /srv/kubernetes
-kube_apiserver_etcd_key: {{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-etcd-key.pem
-kube_apiserver_etcd_cert: {{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-etcd.pem
-kube_apiserver_etcd_ca_cert: {{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-etcd-chain.pem
-kube_apiserver_key: {{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-kube-key.pem
-kube_apiserver_cert: {{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-kube.pem
-kube_apiserver_ca_cert: {{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-kube-chain.pem
+kube_apiserver_etcd_key: "{{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-etcd-key.pem"
+kube_apiserver_etcd_cert: "{{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-etcd.pem"
+kube_apiserver_etcd_ca_cert: "{{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-etcd-chain.pem"
+kube_apiserver_key: "{{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-kube-key.pem"
+kube_apiserver_cert: "{{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-kube.pem"
+kube_apiserver_ca_cert: "{{ kube_apiserver_cert_dir }}/apiserver-{{ ansible_hostname }}-kube-chain.pem"
