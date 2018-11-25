@@ -22,7 +22,7 @@ Some of the relevant configiuration from dependencies is shown below.
 |-----|------------|
 | ``kube_version``        | jumperfly.kubelet |
 | ``kube_pod_cidr_range`` | jumperfly.kubernetes_node |
-| ``kube_cluster_dns``    | jumperfly.kuberneteS_node |
+| ``kube_cluster_dns``    | jumperfly.kubernetes_node |
 | ``kube_cluster_domain`` | jumperfly.kubernetes_node |
 
 ## SSL Configuration
