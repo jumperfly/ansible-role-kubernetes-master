@@ -1,0 +1,45 @@
+- hosts: default
+  become: yes
+  vars:
+    ssl_cert_ca_delegate: default
+    ssl_cert_ca_delegate_name: kubernetes-ca
+  pre_tasks:
+    - include_vars: test-vars.yml
+    - name: Check if CA certs exist
+      stat:
+        path: "{{ root_ca_base_dir }}/kubernetes-ca.pem"
+      register: stat_ca_cert_result
+    - name: Check if certs exist
+      stat:
+        path: "{{ kube_master_cert_dir }}/scheduler.pem"
+      register: stat_cert_result
+    - include_role:
+        name: jumperfly.cfssl
+      when: not (stat_ca_cert_result.stat.exists and stat_cert_result.stat.exists)
+    - name: Include ca-cert-tasks.yml
+      include_tasks: ca-cert-tasks.yml
+      when: not stat_ca_cert_result.stat.exists
+    - name: Include cert-tasks.yml
+      include_tasks: cert-tasks.yml
+      when: not stat_cert_result.stat.exists
+    - name: Copy etcd certs
+      copy:
+        src: vagrant_certs/etcd/{{ item }}
+        dest: /etc/etcd/{{ item }}
+      loop:
+        - etcd-key.pem
+        - etcd-chain.pem
+        - etcd.pem
+    - name: Gather service facts
+      service_facts:
+    - include_role:
+        name: jumperfly.etcd_node
+      when: ansible_facts.services['etcd.service'].state|default("stopped") != "running"
+    - name: Set etcd facts
+      set_fact:
+        etcd_client_listen_ip: "{{ etcd_client_listen_ip }}"
+        etcd_peer_listen_ip: "{{ etcd_peer_listen_ip }}"
+        etcd_cert: "{{ etcd_cert }}"
+        etcd_private_key: "{{ etcd_private_key }}"
+  roles:
+    - kubernetes_master

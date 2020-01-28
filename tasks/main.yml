@@ -1,0 +1,12 @@
+- name: Include base-install.yml
+  include_tasks: base-install.yml
+  when: kube_master_base_install_enabled
+- name: Include base-config.yml
+  include_tasks: base-config.yml
+  when: kube_master_base_config_enabled
+- name: Include encryption-config.yml
+  include_tasks: encryption-config.yml
+  when: kube_master_encrpytion_config_enabled
+- name: Include enable-services.yml
+  include_tasks: enable-services.yml
+  when: kube_master_enable_services

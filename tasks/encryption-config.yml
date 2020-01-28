@@ -1,0 +1,21 @@
+- name: Check if encryption config exists
+  stat:
+    path: "{{ kube_master_encryption_config }}"
+  register: enc_stat_result
+- name: Read encryption key from existing config
+  shell: "grep secret: {{ kube_master_encryption_config }} | awk '{ print $2 }'"
+  when: enc_stat_result.stat.exists
+  changed_when: false
+  register: enc_key_result
+- name: Generate new encrpytion key
+  shell: head -c 32 /dev/urandom | base64
+  when: not enc_stat_result.stat.exists
+  changed_when: false
+  register: gen_key_result
+- name: Create encrpytion config file
+  template:
+    src: encryption-config.yml.j2
+    dest: "{{ kube_master_encryption_config }}"
+    mode: "600"
+  vars:
+    encryption_key: "{{ enc_key_result.stdout if enc_stat_result.stat.exists else gen_key_result.stdout }}"

@@ -6,3 +6,5 @@
 **/.vagrant
 **/.terraform
 **/*.box
+tests/roles
+tests/vagrant_certs

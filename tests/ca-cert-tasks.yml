@@ -1,0 +1,12 @@
+- include_role:
+    name: jumperfly.root_ca
+- include_role:
+    name: jumperfly.ssl_cert
+  vars:
+    ssl_cert_file_base_dir: "{{ root_ca_base_dir }}"
+    ssl_cert_type: intermediate
+    ssl_cert_ca_delegate_name: ca
+    ssl_cert_name: "{{ item }}"
+  loop:
+    - etcd-ca
+    - kubernetes-ca

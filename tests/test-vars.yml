@@ -1,0 +1,10 @@
+etcd_install_mode: package
+etcd_private_key: /etc/etcd/etcd-key.pem
+etcd_cert: /etc/etcd/etcd.pem
+etcd_ca_cert: /etc/etcd/etcd-chain.pem
+etcd_client_listen_ip: "127.0.0.1"
+etcd_peer_listen_ip: "127.0.0.1"
+root_ca_base_dir: /vagrant/tests/vagrant_certs/ca
+ssl_cert_ca_delegate_base_dir: "{{ root_ca_base_dir }}"
+kube_master_cert_dir: /vagrant/tests/vagrant_certs/master
+ssl_cert_file_base_dir: "{{ kube_master_cert_dir }}"

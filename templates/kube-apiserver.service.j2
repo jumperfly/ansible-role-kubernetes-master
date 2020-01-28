@@ -1,0 +1,41 @@
+[Unit]
+Description=Kubernetes API Server
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+ExecStart=/usr/local/bin/kube-apiserver \
+  --advertise-address={{ kube_master_listen_ip }} \
+  --allow-privileged=true \
+  --audit-log-maxage=30 \
+  --audit-log-maxbackup=3 \
+  --audit-log-maxsize=100 \
+  --audit-log-path=/var/log/audit.log \
+  --authorization-mode=Node,RBAC \
+  --bind-address=0.0.0.0 \
+  --client-ca-file={{ kube_apiserver_ca_cert }} \
+  --enable-admission-plugins=NamespaceLifecycle,NodeRestriction,LimitRanger,ServiceAccount,DefaultStorageClass,ResourceQuota \
+  --etcd-cafile={{ kube_apiserver_etcd_ca_cert }} \
+  --etcd-certfile={{ kube_apiserver_etcd_cert }} \
+  --etcd-keyfile={{ kube_apiserver_etcd_key }} \
+  --etcd-servers=
+    {%- for h in groups[kube_master_etcd_group] -%}
+        https://{{ hostvars[h].etcd_client_listen_ip }}:2379
+        {%- if not loop.last %},{% endif %}
+    {%- endfor -%} \
+  --event-ttl=1h \
+  --encryption-provider-config={{ kube_master_encryption_config }} \
+  --kubelet-certificate-authority={{ kube_apiserver_ca_cert }} \
+  --kubelet-client-certificate={{ kube_apiserver_cert }} \
+  --kubelet-client-key={{ kube_apiserver_key }} \
+  --kubelet-https=true \
+  --runtime-config=api/all \
+  --service-account-key-file={{ kube_master_service_account_cert }} \
+  --service-node-port-range=30000-32767 \
+  --tls-cert-file={{ kube_apiserver_cert }} \
+  --tls-private-key-file={{ kube_apiserver_key }} \
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

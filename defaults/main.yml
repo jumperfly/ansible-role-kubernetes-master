@@ -1,0 +1,32 @@
+kube_master_version: "{{ kube_version | default('1.13.1') }}"
+kube_master_base_install_enabled: yes
+kube_master_base_config_enabled: yes
+kube_master_encrpytion_config_enabled: yes
+kube_master_enable_services: yes
+kube_master_services:
+  - kube-apiserver
+  - kube-controller-manager
+  - kube-scheduler
+kube_master_binaries: "{{ kube_master_services + ['kubectl'] }}"
+kube_master_listen_iface: eth0
+kube_master_listen_ip: "{{ ansible_facts[kube_master_listen_iface].ipv4.address }}"
+kube_master_etcd_group: etcd_nodes
+kube_master_pod_cidr_range: 10.201.0.0/16
+
+# SSL configuration - apiserver
+kube_master_cert_dir: /var/lib/kubernetes
+kube_apiserver_etcd_key: "{{ kube_master_cert_dir }}/apiserver-etcd-key.pem"
+kube_apiserver_etcd_cert: "{{ kube_master_cert_dir }}/apiserver-etcd.pem"
+kube_apiserver_etcd_ca_cert: "{{ kube_master_cert_dir }}/apiserver-etcd-chain.pem"
+kube_apiserver_key: "{{ kube_master_cert_dir }}/apiserver-key.pem"
+kube_apiserver_cert: "{{ kube_master_cert_dir }}/apiserver.pem"
+kube_apiserver_ca_cert: "{{ kube_master_cert_dir }}/apiserver-chain.pem"
+kube_controller_manager_key: "{{ kube_master_cert_dir }}/controller-manager-key.pem"
+kube_controller_manager_cert: "{{ kube_master_cert_dir }}/controller-manager.pem"
+kube_controller_manager_ca_cert: "{{ kube_master_cert_dir }}/controller-manager-chain.pem"
+kube_scheduler_key: "{{ kube_master_cert_dir }}/scheduler-key.pem"
+kube_scheduler_cert: "{{ kube_master_cert_dir }}/scheduler.pem"
+kube_scheduler_ca_cert: "{{ kube_master_cert_dir }}/scheduler-chain.pem"
+kube_master_service_account_key: "{{ kube_master_cert_dir }}/service-account-key.pem"
+kube_master_service_account_cert: "{{ kube_master_cert_dir }}/service-account.pem"
+kube_master_encryption_config: "{{ kube_master_cert_dir }}/encrpytion-config.yml"

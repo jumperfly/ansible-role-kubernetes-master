@@ -1,0 +1,20 @@
+- name: Create service files
+  template:
+    src: "{{ item }}.service.j2"
+    dest: /etc/systemd/system/{{ item }}.service
+  loop: "{{ kube_master_services }}"
+- name: Create kubeconfig files
+  template:
+    src: "{{ item }}.kubeconfig.j2"
+    dest: "/var/lib/kubernetes/{{ item }}.kubeconfig"
+  loop:
+    - kube-controller-manager
+    - kube-scheduler
+- name: Create kubeconfig
+  copy:
+    src: kubeconfig-local
+    dest: /var/lib/kubernetes/kubeconfig-local
+- name: Create scheduler config
+  template:
+    src: kube-scheduler.yml.j2
+    dest: /var/lib/kubernetes/kube-scheduler.yml

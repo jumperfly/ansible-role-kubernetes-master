@@ -1,0 +1,14 @@
+- name: Enable services
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: "{{ kube_master_services }}"
+- name: Wait for apiserver to start - 30 seconds
+  uri:
+    url: http://127.0.0.1:8080/healthz
+    status_code: 200
+  register: result
+  until: result.status == 200
+  retries: 10
+  delay: 3
