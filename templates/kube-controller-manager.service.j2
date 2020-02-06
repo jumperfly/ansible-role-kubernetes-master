@@ -5,6 +5,7 @@ Documentation=https://github.com/kubernetes/kubernetes
 [Service]
 ExecStart=/usr/local/bin/kube-controller-manager \
   --address=0.0.0.0 \
+  --allocate-node-cidrs \
   --cluster-cidr={{ kube_master_pod_cidr_range }} \
   --cluster-name=kubernetes \
   --kubeconfig=/var/lib/kubernetes/kube-controller-manager.kubeconfig \
