@@ -1,0 +1,49 @@
+- include_role:
+    name: jumperfly.ssl_cert
+  vars:
+    ssl_cert_type: peer
+    ssl_cert_file_base_dir: /vagrant/tests/vagrant_certs/etcd
+    ssl_cert_name: etcd
+    ssl_cert_ca_delegate_name: etcd-ca
+    ssl_cert_subject_common_name: "{{ ansible_hostname }}"
+    ssl_cert_hosts:
+      - "127.0.0.1"
+      - localhost
+- include_role:
+    name: jumperfly.ssl_cert
+  vars:
+    ssl_cert_type: client
+    ssl_cert_name: apiserver-etcd
+    ssl_cert_ca_delegate_name: etcd-ca
+- include_role:
+    name: jumperfly.ssl_cert
+  vars:
+    ssl_cert_type: server
+    ssl_cert_name: apiserver
+    ssl_cert_subject_common_name: kubernetes
+    ssl_cert_hosts:
+      - kubernetes
+      - kubernetes.default
+      - kubernetes.default.svc
+      - kubernetes.default.svc.cluster
+      - kubernetes.default.svc.cluster.local
+      - "10.0.0.1"
+      - "127.0.0.1"
+- include_role:
+    name: jumperfly.ssl_cert
+  vars:
+    ssl_cert_type: peer
+    ssl_cert_name: service-account
+    ssl_cert_subject_common_name: service-account
+- include_role:
+    name: jumperfly.ssl_cert
+  vars:
+    ssl_cert_type: client
+    ssl_cert_name: controller-manager
+    ssl_cert_subject_common_name: system:kube-controller-manager
+- include_role:
+    name: jumperfly.ssl_cert
+  vars:
+    ssl_cert_type: client
+    ssl_cert_name: scheduler
+    ssl_cert_subject_common_name: system:kube-scheduler
